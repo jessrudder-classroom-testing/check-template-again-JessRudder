@@ -1,0 +1,24 @@
+name: Setup
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - ".github/workflows/setup.yml"
+
+jobs:
+  build:
+    name: Setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - uses: jeffrafter/setup-action@v1
+        with:
+          pull-request-title: "Adding two numbers"
+          pull-request-template: .github/template/PULL_REQUEST.md
+          pull-request-files: .github/template/files/
+          pull-request-branch-name: assignment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
